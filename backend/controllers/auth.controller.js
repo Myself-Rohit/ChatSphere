@@ -1,11 +1,7 @@
 import User from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 import generateToken from "../utils/generateToken.js";
-//  "fullname":"user name2",
-//     "username":"user2name",
-//     "password":"user2pass",
-//     "confirmPassword":"user2pass",
-//     "gender":"male"
+
 export const signup = async (req, res) => {
 	try {
 		const { fullname, username, password, confirmPassword, gender } = req.body;
@@ -39,6 +35,41 @@ export const signup = async (req, res) => {
 			res.status(400).json({ error: "Invalid user data" });
 		}
 	} catch (error) {
-		res.status(400).json({ error: "Internal server error" });
+		res.status(500).json({ error: "Internal server error" });
+	}
+};
+
+export const signin = async (req, res) => {
+	try {
+		const { username, password } = req.body;
+		if (!username || !password) {
+			res.status(400).json({ error: "All fields required" });
+		}
+		const user = await User.findOne({ username });
+		if (!user) {
+			res.status(400).json({ error: "User not found" });
+		}
+		const validPassword = await bcryptjs.compare(
+			password,
+			user?.password || ""
+		);
+		if (!validPassword) {
+			res.status(400).json({ error: "Invalid password" });
+		} else {
+			generateToken(user._id, res);
+			const { password: pass, ...rest } = user._doc;
+			res.status(200).json(rest);
+		}
+	} catch (error) {
+		res.status(500).json({ error: "Internal server error" });
+	}
+};
+
+export const signout = (req, res) => {
+	try {
+		res.cookie("access_token", "", { maxAge: 0 });
+		res.status(200).json({ message: "Logged out successfully" });
+	} catch (error) {
+		res.status(500).json({ error: "Internal server error" });
 	}
 };
