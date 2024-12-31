@@ -30,7 +30,8 @@ export const signup = async (req, res) => {
 		if (newUser) {
 			generateToken(newUser._id, res);
 			await newUser.save();
-			res.status(201).json(newUser);
+			const { password: pass, ...rest } = newUser._doc;
+			res.status(200).json(rest);
 		} else {
 			res.status(400).json({ error: "Invalid user data" });
 		}
