@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import express from "express";
+import express, { urlencoded } from "express";
 import authRoute from "./routes/auth.route.js";
 import messageRoute from "./routes/message.route.js";
 import userRoute from "./routes/user.route.js";
@@ -11,6 +11,7 @@ dotenv.config();
 const PORT = process.env.PORT || 7001;
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/api/auth", authRoute);
 app.use("/api/messages", messageRoute);

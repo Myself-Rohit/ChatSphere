@@ -8,7 +8,7 @@ const useLogin = () => {
 	const login = async (formData: { username: string; password: string }) => {
 		try {
 			setLoading(true);
-			const res = await fetch("http://localhost:7000/api/auth/signin", {
+			const res = await fetch("/api/auth/signin", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -19,6 +19,7 @@ const useLogin = () => {
 			if (data.error) {
 				throw new Error(data.error);
 			}
+			localStorage.setItem("currentUser", JSON.stringify(data));
 			setAuthUser(data);
 			toast.success(`Wellcome back ${data.username}`);
 		} catch (error: Error | any) {

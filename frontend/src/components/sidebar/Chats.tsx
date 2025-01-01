@@ -1,18 +1,17 @@
 import Chat from "./Chat";
-import useLogout from "../../hooks/useLogout.ts";
+import useChats from "../../hooks/useGetChats";
+import { CgSpinner } from "react-icons/cg";
 
 const Chats = () => {
-	const { logout } = useLogout();
-	const handleLogout = () => {
-		logout();
-	};
+	const { loading, chats } = useChats();
 
 	return (
 		<div className="py-2 flex flex-col overflow-auto">
-			<Chat />
-			<Chat />
-			<Chat />
-			<div onClick={handleLogout}>logout</div>
+			{chats.map((chat, idx) => (
+				<Chat chat={chat} lastIdx={chats.length == idx} />
+			))}
+
+			{loading ? <CgSpinner /> : null}
 		</div>
 	);
 };
