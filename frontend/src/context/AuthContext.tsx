@@ -20,6 +20,7 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 type User = {
+	_id: string;
 	fullname: string;
 	username: string;
 	gender: string;
