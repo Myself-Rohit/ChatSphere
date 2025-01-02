@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+type ChatType = {
+	_id: string;
+	fullname: string;
+	username: string;
+	gender: string;
+	profilePic: string;
+};
 
-const useChats = () => {
+const useGetChats = () => {
 	const [loading, setLoading] = useState(false);
-	const [chats, setChats] = useState([]);
+	const [chats, setChats] = useState<ChatType[]>([]);
 
 	useEffect(() => {
 		const getChats = async () => {
@@ -28,6 +35,6 @@ const useChats = () => {
 		};
 		getChats();
 	}, []);
-	return { loading, chats };
+	return { loading, chats, setChats };
 };
-export default useChats;
+export default useGetChats;
