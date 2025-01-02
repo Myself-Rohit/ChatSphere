@@ -6,12 +6,12 @@ export const signup = async (req, res) => {
 	try {
 		const { fullname, username, password, confirmPassword, gender } = req.body;
 		if (password !== confirmPassword) {
-			res.status(400).json({ error: "password missmatch" });
+			return res.status(400).json({ error: "password missmatch" });
 		}
 
 		const userExist = await User.findOne({ username });
 		if (userExist) {
-			res.status(400).json({ error: "Username already exits" });
+			return res.status(400).json({ error: "Username already exits" });
 		}
 
 		const salt = await bcryptjs.genSalt(10);
@@ -44,22 +44,22 @@ export const signin = async (req, res) => {
 	try {
 		const { username, password } = req.body;
 		if (!username || !password) {
-			res.status(400).json({ error: "All fields required" });
+			return res.status(400).json({ error: "All fields required" });
 		}
 		const user = await User.findOne({ username });
 		if (!user) {
-			res.status(400).json({ error: "User not found" });
+			return res.status(400).json({ error: "User not found" });
 		}
 		const validPassword = await bcryptjs.compare(
 			password,
 			user?.password || ""
 		);
 		if (!validPassword) {
-			res.status(400).json({ error: "Invalid password" });
+			return res.status(400).json({ error: "Invalid password" });
 		} else {
 			generateToken(user._id, res);
 			const { password: pass, ...rest } = user._doc;
-			res.status(200).json(rest);
+			return res.status(200).json(rest);
 		}
 	} catch (error) {
 		res.status(500).json({ error: "Internal server error" });

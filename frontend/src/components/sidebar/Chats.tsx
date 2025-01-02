@@ -8,7 +8,7 @@ const Chats = () => {
 	return (
 		<div className="py-2 flex flex-col overflow-auto">
 			{chats.map((chat, idx) => (
-				<Chat chat={chat} lastIdx={chats.length == idx} />
+				<Chat key={chat._id} chat={chat} lastIdx={chats.length == idx} />
 			))}
 
 			{loading ? <CgSpinner /> : null}

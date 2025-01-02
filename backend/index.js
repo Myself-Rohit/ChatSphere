@@ -6,7 +6,7 @@ import userRoute from "./routes/user.route.js";
 import connectMongoDB from "./db/connectMongoDB.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-const app = express();
+import { app,server } from "./socket/socket.js";
 dotenv.config();
 const PORT = process.env.PORT || 7001;
 app.use(cors());
@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use("/api/auth", authRoute);
 app.use("/api/messages", messageRoute);
 app.use("/api/users", userRoute);
-app.listen(PORT, () => {
+server.listen(PORT, () => {
 	connectMongoDB();
 	console.log(`Server started! at port: ${PORT}`);
 });

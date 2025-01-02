@@ -1,16 +1,17 @@
+import { useSocketContext } from "../../context/SocketContext";
 import useChats from "../../zustand/useChats";
 
 type ChatProps = {
-	key?: string;
 	chat: { _id: string; username: string; fullname: string; profilePic: string };
 	lastIdx: boolean;
 };
 
 const Chat = (props: ChatProps) => {
 	const { chat, lastIdx } = props;
-
 	const { selectedChat, setSelectedChat } = useChats();
 	const isSelected = selectedChat?._id === chat._id;
+	const { onlineUsers } = useSocketContext();
+	const isOnline = onlineUsers.includes(chat._id);
 	return (
 		<>
 			{
@@ -20,7 +21,7 @@ const Chat = (props: ChatProps) => {
 						isSelected && "bg-sky-500"
 					} flex gap-2 items-center rounded p-2 py-1 cursor-pointer `}
 				>
-					<div className="avatar online">
+					<div className={`avatar ${isOnline ? "online" : ""}`}>
 						<div className="w-12 rounded-full">
 							<img src={chat.profilePic} alt="user avatar" />
 						</div>
