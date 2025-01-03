@@ -12,8 +12,8 @@ function Login() {
 		login(formData);
 	};
 	return (
-		<div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-			<div className="w-full p-6 bg-gray-400 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 shadow-md ">
+		<div className="flex flex-col items-center justify-center sm:min-w-96 mx-auto">
+			<div className="w-full p-6 bg-gray-400 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-0 shadow-md ">
 				<h1 className="text-3xl text-gray-300 font-semibold text-center">
 					Login
 					<span className="text-blue-500">ChatSphere</span>
