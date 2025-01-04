@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
-import useChats from "../../zustand/useChats";
-import useGetChats from "../../hooks/useGetChats";
+import useChats from "../../zustand/useChats.ts";
+import useGetChats from "../../hooks/useGetChats.ts";
 import { toast } from "react-toastify";
 
 type ChatType = {
@@ -34,17 +34,17 @@ const SearchInput = () => {
 		}
 	};
 	return (
-		<form onSubmit={handleSubmit} className="flex items-center gap-2">
+		<form onSubmit={handleSubmit} className="flex items-center gap-2 w-full">
 			<input
 				value={search}
 				onChange={(e) => setSearch(e.target.value)}
 				type="text"
 				placeholder="Search…"
-				className="input input-bordered rounded-full bg-black"
+				className="input input-bordered rounded-full bg-black w-full"
 			/>
 			<button
 				type="submit"
-				className="btn btn-circle bg-sky-500 text-white text-2xl"
+				className="btn btn-circle bg-sky-500 text-white text-2xl hidden sm:inline-flex"
 			>
 				<IoSearchSharp />
 			</button>

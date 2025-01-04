@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import GenderCheckbox from "./GenderCheckbox";
 import { FC, useState } from "react";
 import useSignup from "../../hooks/useSignup.ts";
+import useChats from "../../zustand/useChats.ts";
 
 const SignUp: FC = () => {
 	const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const SignUp: FC = () => {
 		confirmPassword: "",
 		gender: "",
 	});
+	const { setSelectedChat } = useChats();
 
 	const { loading, signup } = useSignup();
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -22,6 +24,7 @@ const SignUp: FC = () => {
 	): void => {
 		e.preventDefault();
 		signup(formData);
+		setSelectedChat(null);
 	};
 
 	const handleCheckbox = (gender: string): void => {

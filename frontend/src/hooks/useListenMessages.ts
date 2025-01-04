@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSocketContext } from "../context/SocketContext";
-import useChats from "../zustand/useChats";
+import useChats from "../zustand/useChats.ts";
 
 type Message = {
 	_id: string;

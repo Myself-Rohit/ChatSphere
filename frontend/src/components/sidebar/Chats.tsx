@@ -1,12 +1,13 @@
 import Chat from "./Chat";
-import useChats from "../../hooks/useGetChats";
+import useChats from "../../hooks/useGetChats.ts";
 import { CgSpinner } from "react-icons/cg";
+import "../../App.css";
 
 const Chats = () => {
 	const { loading, chats } = useChats();
 
 	return (
-		<div className="py-2 flex flex-col overflow-auto">
+		<div className="py-2 flex flex-col overflow-auto scrollbar">
 			{chats.map((chat, idx) => (
 				<Chat key={chat._id} chat={chat} lastIdx={chats.length == idx} />
 			))}

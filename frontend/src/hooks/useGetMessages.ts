@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import useChats from "../zustand/useChats";
+import useChats from "../zustand/useChats.ts";
 
 const useGetMessages = () => {
 	const [loading, setLoading] = useState(false);

@@ -1,15 +1,18 @@
 import { Link } from "react-router";
-import useLogin from "../../hooks/useLogin";
+import useLogin from "../../hooks/useLogin.ts";
 import { FormEvent, FormEventHandler, useState } from "react";
+import useChats from "../../zustand/useChats.ts";
 
 function Login() {
 	const { loading, login } = useLogin();
 	const [formData, setFormData] = useState({ username: "", password: "" });
+	const { setSelectedChat } = useChats();
 	const handleSubmit: FormEventHandler<HTMLFormElement> = (
 		e: FormEvent
 	): void => {
 		e.preventDefault();
 		login(formData);
+		setSelectedChat(null);
 	};
 	return (
 		<div className="flex flex-col items-center justify-center sm:min-w-96 mx-auto">
@@ -40,7 +43,7 @@ function Login() {
 							onChange={(e) =>
 								setFormData({ ...formData, password: e.target.value })
 							}
-							type="text"
+							type="password"
 							placeholder="Enter password"
 							className="w-full input input-bordered input-primary h-10 bg-black "
 						/>

@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { BsSend } from "react-icons/bs";
-import useSendMessage from "../../hooks/useSendMessage";
+import useSendMessage from "../../hooks/useSendMessage.ts";
 
 const MessageInput = () => {
 	const [message, setMessage] = useState("");

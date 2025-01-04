@@ -1,5 +1,5 @@
 import { useAuthContext } from "../../context/AuthContext";
-import useChats from "../../zustand/useChats";
+import useChats from "../../zustand/useChats.ts";
 import moment from "moment";
 type MessageProp =
 	| {
@@ -20,11 +20,15 @@ const Message = ({ message }: MessageProp) => {
 	return (
 		<div className={`chat ${styleChat}`}>
 			<div className="chat-image avatar">
-				<div className="w-10 rounded-full">
+				<div className="w-7 sm:w-10 rounded-full">
 					<img alt="Tailwind CSS chat bubble component" src={profilePic} />
 				</div>
 			</div>
-			<div className={`chat-bubble ${styleBg}`}>{message.message}</div>
+			<div
+				className={`chat-bubble ${styleBg} p-2 text-sm sm:text-base md:text-lg`}
+			>
+				{message.message}
+			</div>
 			<time className="text-xs opacity-50">
 				{moment(message.createdAt).format("h:mm A")}
 			</time>

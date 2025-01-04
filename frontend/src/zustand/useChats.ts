@@ -5,7 +5,7 @@ type Chat = {
 	username: string;
 	fullname: string;
 	profilePic: string;
-};
+} | null;
 type Message =
 	| {
 			senderId: string;

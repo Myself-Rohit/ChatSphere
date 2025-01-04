@@ -13,7 +13,7 @@ const Messages = () => {
 		}, 100);
 	}, [messages]);
 	return (
-		<div className="px-4 flex-1 overflow-auto">
+		<div className="px-4 pt-20 h-[85vh] overflow-auto scrollbar">
 			{!loading &&
 				messages &&
 				messages.map((message: any) => (
