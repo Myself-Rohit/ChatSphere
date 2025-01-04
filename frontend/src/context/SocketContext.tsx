@@ -38,7 +38,7 @@ export const SocketContextProvider: React.FC<SocketContextProviderProps> = ({
 
 	useEffect(() => {
 		if (authUser) {
-			const newSocket = io("http://localhost:7000", {
+			const newSocket = io("https://chatsphere-ow2i.onrender.com", {
 				query: { userId: authUser._id },
 			});
 			setSocket(newSocket);
