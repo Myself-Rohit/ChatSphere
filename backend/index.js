@@ -1,6 +1,6 @@
 import path from "path";
 import dotenv from "dotenv";
-import express, { urlencoded } from "express";
+import express from "express";
 import authRoute from "./routes/auth.route.js";
 import messageRoute from "./routes/message.route.js";
 import userRoute from "./routes/user.route.js";
