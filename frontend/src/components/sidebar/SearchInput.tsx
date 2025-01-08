@@ -1,8 +1,9 @@
 import { FormEvent, useState } from "react";
-import { IoSearchSharp } from "react-icons/io5";
 import useChats from "../../zustand/useChats.ts";
 import useGetChats from "../../hooks/useGetChats.ts";
 import { toast } from "react-toastify";
+import { useAuthContext } from "../../context/AuthContext.tsx";
+import { Link } from "react-router";
 
 type ChatType = {
 	_id: string;
@@ -16,6 +17,7 @@ const SearchInput = () => {
 	const [search, setSearch] = useState("");
 	const { chats } = useGetChats();
 	const { setSelectedChat } = useChats();
+	const { authUser } = useAuthContext();
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
@@ -42,12 +44,14 @@ const SearchInput = () => {
 				placeholder="Search…"
 				className="input input-bordered rounded-full bg-black w-full"
 			/>
-			<button
-				type="submit"
-				className="btn btn-circle bg-sky-500 text-white text-2xl hidden sm:inline-flex"
+			<Link
+				to="/profile"
+				className={`avatar hidden sm:inline-flex cursor-pointer`}
 			>
-				<IoSearchSharp />
-			</button>
+				<div className="w-10 sm:w-12 rounded-full" title="profile">
+					<img src={authUser?.profilePic} alt="user avatar" />
+				</div>
+			</Link>
 		</form>
 	);
 };

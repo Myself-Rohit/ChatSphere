@@ -30,7 +30,7 @@ const Chat = (props: ChatProps) => {
 					<div className="flex flex-col flex-1">
 						<div className="flex gap-3 justify-between">
 							<p className="font-bold text-gray-200">{chat.fullname}</p>
-							<span className="text-xl hidden sm:block">🎃</span>
+							<span className="text-xl hidden sm:block">💬</span>
 						</div>
 					</div>
 				</div>
